@@ -1,0 +1,3 @@
+knn_neighbors: 5
+heldout_hospitals: 12
+ood_threshold: 0.5
