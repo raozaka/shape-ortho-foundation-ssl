@@ -1,3 +1,8 @@
+![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Prototype-blue)
+
+
 # Orthopedic Foundation Model (SSL) — SHAPE/WCMM Prototype (Synthetic)
 
 **Goal:** Demonstrate an assumption-based experimental setup for training and evaluating a **self-supervised orthopedic foundation model** from **multi-hospital X-ray data** (17k patients, 72 hospitals, multi-view studies) with **hospital-held-out validation** and **patient-level fusion**.
