@@ -3,87 +3,131 @@
 ![Status](https://img.shields.io/badge/Status-Prototype-blue)
 
 
-# Orthopedic Foundation Model (SSL) — SHAPE/WCMM Prototype (Synthetic)
+# 🦴 OrthoFM  
+### A Self-Supervised Orthopedic Foundation Model from Nationwide X-ray Data
 
-**Goal:** Demonstrate an assumption-based experimental setup for training and evaluating a **self-supervised orthopedic foundation model** from **multi-hospital X-ray data** (17k patients, 72 hospitals, multi-view studies) with **hospital-held-out validation** and **patient-level fusion**.
-
-> This repository uses a **synthetic X-ray cohort** to illustrate the pipeline end-to-end (no patient data).  
-> The structure mirrors the intended SHAPE/WCMM workflow and evaluation strategy.
-
----
-
-## Why this matters
-- Orthopedic X-rays are abundant but heterogeneous across hospitals (scanner/protocol/domain shift).
-- Labels are often unavailable or expensive → self-supervised pretraining is a strong starting point.
-- A foundation model should transfer beyond femur fractures to broader orthopedic tasks.
+<p align="center">
+<img src="assets/figures/pipeline_diagram.png" width="85%">
+</p>
 
 ---
 
-## What’s inside
-✅ **Synthetic multi-hospital cohort generator** (72 sites, style shift, artifacts, multi-view per patient)  
-✅ **Self-supervised pretraining** (SimCLR-style, TensorFlow)  
-✅ **Hospital-held-out evaluation** (generalization + leakage checks)  
-✅ **Patient-level fusion** (multi-image → study embedding)  
-✅ **Downstream transfer** (linear probe / few-shot fine-tuning)
+## 🚀 Vision
+
+Modern orthopedic AI models are task-specific, label-hungry, and hospital-fragile.
+
+**OrthoFM** proposes a different direction:
+
+> Train a large-scale, self-supervised foundation model  
+> on nationwide multi-hospital X-ray data  
+> and enable transfer across orthopedic tasks.
+
+This repository provides a synthetic experimental framework that mirrors the proposed SHAPE/WCMM orthopedic foundation model pipeline.
 
 ---
 
-## Pipeline (high level)
-**X-ray → QC/Normalization → SSL Encoder → Embeddings →**
-- kNN retrieval & clustering
-- hospital-held-out generalization
-- downstream tasks (fracture subtype, implants, outcomes)
+## 🧠 Conceptual Framework
 
-![Pipeline](assets/figures/pipeline_diagram.png)
+<p align="center">
+<img src="assets/figures/samples_grid.png" width="80%">
+</p>
 
----
+### Core Principles
 
-## Quickstart (Colab)
-Open the main notebook in Colab:
-
-- `notebooks/02_ssl_pretrain_simclr.ipynb`  
-  (pretraining + evaluation in one place)
-
-> Recommended: GPU runtime.
+- 🏥 Multi-hospital robustness
+- 🔍 Label-free representation learning
+- 🧬 Patient-level modeling
+- 📊 Domain shift evaluation
+- ⚖ Leakage testing
+- 🎯 Downstream transfer
 
 ---
 
-## Results (demo)
-**Representation quality (held-out hospitals):**
-- kNN retrieval aligns anatomy/morphology clusters  
-- patient-level pooling improves stability
+## 🏗️ Architecture Overview
 
-**Transfer learning:**
-- linear probe with limited labels shows measurable signal
+<p align="center">
+<img src="assets/figures/embedding_space.png" width="75%">
+</p>
 
-*(Numbers vary due to synthetic randomness; focus is on experimental design & evaluation logic.)*
-
----
-
-## Key evaluation design
-### 1) Representation quality (no labels required)
-- kNN retrieval consistency
-- embedding stability across seeds/augmentations
-- hospital leakage test (should not encode site shortcuts)
-
-### 2) Generalization across hospitals
-- held-out hospital split (e.g., 60 train / 12 unseen)
-- robustness across quality strata
-- OOD detection behavior
-
-### 3) Downstream transfer
-- linear probe vs few-shot vs full fine-tuning
-- patient-level modeling (multi-image per patient)
+1. Synthetic multi-hospital cohort generation  
+2. Self-supervised contrastive pretraining (SimCLR-style)
+3. Embedding space analysis (kNN, clustering)
+4. Hospital-held-out validation
+5. Downstream linear probe transfer
 
 ---
 
-## Assumptions (explicit)
-- Reliable patient + hospital IDs
-- multi-view/multi-timepoint images per patient
-- DICOM metadata available for normalization
-- initial SSL without labels; downstream labels via small annotation/registry linkage
+## 📦 Repository Structure
+
+├─ notebooks/
+│ ├─ 01_synthetic_cohort.ipynb
+│ ├─ 02_ssl_pretrain_simclr.ipynb
+│ ├─ 03_eval_hospital_ood.ipynb
+│ └─ 04_downstream_linearprobe.ipynb
+├─ src/
+│ ├─ data/
+│ ├─ models/
+│ ├─ eval/
+│ └─ utils/
+├─ configs/
+├─ assets/
+
+
 
 ---
+
+## 🔬 Experimental Assumptions
+
+This synthetic setup reflects:
+
+- 17,000 patients
+- 72 hospitals
+- Multi-view per patient
+- Hidden fracture subtype (normal vs atypical)
+- Domain shift across institutions
+- No labels used during pretraining
+
+The objective is not dataset realism —  
+but structural realism of the foundation model pipeline.
+
+---
+
+## 📊 Evaluation Strategy
+
+<p align="center">
+<img src="assets/figures/heldout_hospitals.png" width="70%">
+</p>
+
+We evaluate:
+
+- Representation quality (kNN retrieval)
+- Embedding stability
+- Hospital leakage
+- Held-out hospital generalization
+- Downstream transfer performance
+- Calibration & uncertainty
+
+---
+
+## 🎯 Strategic Impact
+
+OrthoFM demonstrates a pathway from:
+
+> Routine X-rays  
+> → Foundation-level representation learning  
+> → Transferable orthopedic intelligence  
+> → Multimodal SHAPE integration  
+
+This project serves as a prototype infrastructure blueprint  
+for nationwide imaging foundation modeling.
+
+---
+
+## 🛠 Installation
+
+```bash
+pip install -r requirements.txt
+
 
 ## Author
 **Zaka Ur Rehman**  
