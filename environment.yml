@@ -1,1 +1,14 @@
+name: ortho-fm
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - tensorflow>=2.18
+      - numpy
+      - matplotlib
+      - scikit-learn
+      - pyyaml
+      - tqdm
 
